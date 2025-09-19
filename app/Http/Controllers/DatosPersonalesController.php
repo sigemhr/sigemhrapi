@@ -34,6 +34,12 @@ class DatosPersonalesController extends Controller
         return response()->json($datos, 201);
     }
 
+    public function personalwithOutUser()
+    {
+        $datos = DatosPersonales::sinUsuario()->get();
+        return response()->json(['status' => true, 'data'=>$datos ],200);
+    }
+
     /**
      * Display the specified resource.
      */

@@ -59,6 +59,13 @@ class DatosPersonales extends Model
     {
         return $this->hasMany(Documentacion::class, 'id_persona');
     }
+    
+    public function scopeSinUsuario($query)
+    {
+        return $query->leftJoin('users', 'datos_personales.email', '=', 'users.email')
+                     ->whereNull('users.email')
+                     ->select('datos_personales.*');
+    }
 }
 
 class DatosEducativos extends Model
