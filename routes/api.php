@@ -31,7 +31,7 @@ Route::prefix('auth')->group(function () {
        
 
         Route::apiResource('personalsigem', DatosPersonalesController::class);
-        Route::get('personalsigem/personalwithOutUser', [DatosPersonalesController::class, 'personalwithOutUser']);
+        Route::get('personalwithOutUser', [DatosPersonalesController::class, 'personalwithOutUser']);
         Route::apiResource('users', UserController::class);
     });
 });

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\DatosPersonales;
+use App\Models\Modulo;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Log;
 
@@ -37,7 +38,9 @@ class DatosPersonalesController extends Controller
     public function personalwithOutUser()
     {
         $datos = DatosPersonales::sinUsuario()->get();
-        return response()->json(['status' => true, 'data'=>$datos ],200);
+       $modulos = Modulo::with('submodulos.subsubmodulos')->get();
+        
+        return response()->json(['status' => true, 'data'=>$datos,'modulos'=>$modulos ],200);
     }
 
     /**
