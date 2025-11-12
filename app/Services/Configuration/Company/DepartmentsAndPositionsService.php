@@ -43,6 +43,16 @@ class DepartmentsAndPositionsService
         }
     }
 
+    public function getActiveUsers(): Collection
+    {
+        try {
+            return $this->repository->getActiveUsers();
+        } catch (Exception $e) {
+            Log::error('Error getting all active users: ' . $e->getMessage());
+            throw $e;
+        }
+    }
+
     /**
      * Get paginated departments and positions
      *

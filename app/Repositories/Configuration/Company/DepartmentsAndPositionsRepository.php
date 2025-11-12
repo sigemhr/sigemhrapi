@@ -3,6 +3,7 @@
 namespace App\Repositories\Configuration\Company;
 
 use App\Models\Departamento;
+use App\Models\Personal;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Pagination\LengthAwarePaginator;
 
@@ -12,15 +13,18 @@ class DepartmentsAndPositionsRepository
      * @var Departamento
      */
     protected $model;
+    protected $modelPersonal;
 
     /**
      * DepartmentsAndPositionsRepository constructor.
      *
      * @param Departamento $model
+     * @param Personal $modelPersonal
      */
-    public function __construct(Departamento $model)
+    public function __construct(Departamento $model, Personal $modelPersonal)
     {
         $this->model = $model;
+        $this->modelPersonal = $modelPersonal;
     }
 
     /**
@@ -160,5 +164,10 @@ class DepartmentsAndPositionsRepository
     public function exists(int $id): bool
     {
         return $this->model->where('id', $id)->exists();
+    }
+
+    public function getActiveUsers(): Collection
+    {
+        return $this->modelPersonal->where('activo', true)->get();
     }
 }

@@ -85,4 +85,24 @@ class DepartmentsController extends Controller
     {
         //
     }
+    public function getActiveUsers()
+    {
+       try {
+          
+
+            $departments = $this->service->getActiveUsers();
+            return response()->json([
+                'success' => true,
+                'message' => 'usuarios activos obtenidos exitosamente.',
+                'data' => $departments
+            ], 200);
+
+        } catch (\Exception $e) {
+            return response()->json([
+                'success' => false,
+                'message' => 'Error al obtener los departamentos activos.',
+                'error' => $e->getMessage()
+            ], 500);
+        }
+    }
 }
